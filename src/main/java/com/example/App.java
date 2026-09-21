@@ -15,7 +15,7 @@ public class App {
         HttpServer server = HttpServer.create(new InetSocketAddress(port), 0);
 
         server.createContext("/", exchange -> {
-            send(exchange, 200, "Hello from Java running in Docker!\n");
+            send(exchange, 200, "Hello from Java running in Docker!!!!!!\n");
         });
 
         server.createContext("/health", exchange -> {
