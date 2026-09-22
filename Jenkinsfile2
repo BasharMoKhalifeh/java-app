@@ -20,7 +20,7 @@ pipeline {
                             -v "$WORKSPACE:/app" \
                             -w /app \
                             maven:3.9-eclipse-temurin-21 \
-                            mvn sonar:sonar \
+                            mvn org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
                             -Dsonar.projectKey=java-app
                     '''
                 }
