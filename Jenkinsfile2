@@ -1,0 +1,30 @@
+pipeline {
+    agent {
+        label 'docker'
+    }
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/BasharMoKhalifeh/java-app.git'
+            }
+        }
+
+        stage('SonarQube Scan') {
+            steps {
+                withSonarQubeEnv('SonarQube') {
+                    sh '''
+                        docker run --rm \
+                            --network devops-network \
+                            -v "$WORKSPACE:/app" \
+                            -w /app \
+                            maven:3.9-eclipse-temurin-21 \
+                            mvn sonar:sonar \
+                            -Dsonar.projectKey=java-app
+                    '''
+                }
+            }
+        }
+    }
+}
